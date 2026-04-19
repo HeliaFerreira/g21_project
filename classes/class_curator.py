@@ -19,8 +19,8 @@ class Curator(Gclass):
     # field description for use in, for example, input form
     des = ['Id_Curator','Extra_Info','Specialty']
     # Constructor: Called when an object is instantiated
-    def __init__(self,id,extra_info,specialty, id_museum, id_specialty):
-        super().__init__(id_museum, id_specialty)
+    def __init__(self,id,extra_info,specialty):
+        super().__init__()
         # Object attributes
         id = Curator.get_id(id)
         self._id = id
