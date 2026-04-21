@@ -23,7 +23,7 @@ class Exhibit(Gclass):
     # Descrição dos campos 
     des = ['Id', 'Creation Date', 'Title', 'Category']
     
-# Construtor: Chamado quando o objeto é instanciado
+# Construtor
     def __init__(self, id, creation_date, title, category):
         super().__init__()
         
@@ -40,7 +40,7 @@ class Exhibit(Gclass):
         # Adicionar o novo objeto ao dicionário de objetos
         Exhibit.obj[id] = self
         
-        # Adicionar o id à lista de ids (garantindo que não duplica)
+        # Adicionar o id à lista de ids 
         if id not in Exhibit.lst:
             Exhibit.lst.append(id)
 
