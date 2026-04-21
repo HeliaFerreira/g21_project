@@ -14,13 +14,13 @@ class Exhibit(Gclass):
     pos = 0
     sortkey = ''
     
-    # Lista de atributos (o identificador tem de ser o primeiro e chamar-se '_id')
+    # Lista de atributos
     att = ['_id', '_creation_date', '_title', '_category']
     
     # Título do cabeçalho da classe
     header = 'Exhibits'
     
-    # Descrição dos campos (para ser usado, por exemplo, em formulários de input)
+    # Descrição dos campos 
     des = ['Id', 'Creation Date', 'Title', 'Category']
     
 # Construtor: Chamado quando o objeto é instanciado
@@ -31,7 +31,7 @@ class Exhibit(Gclass):
         id = Exhibit.get_id(id)
         self._id = id
         
-        # Converte a data diretamente, tal como o teu professor fez na classe Person
+        # Converte a data diretamente
         self._creation_date = datetime.date.fromisoformat(str(creation_date))
         
         self._title = str(title)
