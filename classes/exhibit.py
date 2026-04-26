@@ -5,7 +5,7 @@ Created on Tue Apr 21 13:53:00 2026
 @author: marti
 """
 
-from gclass import Gclass
+from classes.gclass import Gclass
 import datetime
 
 class Exhibit(Gclass):
