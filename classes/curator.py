@@ -36,7 +36,7 @@ class Curator(Gclass):
                 Curator.obj[id] = self
                 Curator.lst.append(id)
             else:
-                print(f'Specialty {id_museum} not found')
+                print(f'Specialty {id_specialty} not found')
         else:
             print(f'Museum {id_museum} not found')
             
