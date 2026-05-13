@@ -3,8 +3,10 @@
 #objective: class Product
 """""
 # Class Curator
-# Import the generic class
+# Import classes
 from classes.gclass import Gclass
+from classes.museum import Museum
+from classes.specialty import Specialty
 
 class Curator(Gclass):
     obj = dict()
@@ -21,14 +23,23 @@ class Curator(Gclass):
     def __init__(self, id, extra_info, id_museum, id_specialty):
         super().__init__()
         # Object attributes
-        id = Curator.get_id(id)
-        self._id = id
-        self._extra_info = extra_info
-        self._id_museum = id_museum
-        self._id_specialty = id_specialty 
+        id_museum = int(id_museum)
+        id_specialty = int(id_specialty)
+        if id_museum in Museum.lst:
+            if id_specialty in Specialty.lst:
+                id = int(Curator.get_id(id))
+                self._id = id
+                self._extra_info = extra_info
+                self._id_museum = id_museum
+                self._id_specialty = id_specialty 
         # Add the new object to the Curator list
-        Curator.obj[id] = self
-        Curator.lst.append(id)
+                Curator.obj[id] = self
+                Curator.lst.append(id)
+            else:
+                print(f'Specialty {id_museum} not found')
+        else:
+            print(f'Museum {id_museum} not found')
+            
     # Object properties
     # id property getter method
     @property
@@ -48,3 +59,4 @@ class Curator(Gclass):
     @property
     def id_specialty(self):
         return self._id_specialty
+    
