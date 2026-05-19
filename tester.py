@@ -62,7 +62,26 @@ for id in Exhibit.lst:
 #creates a curator 
 for id in Curator.lst:
     print(Curator.obj[id]) 
-    
+
+c1 = Curator(2001, "Curador Principal Teste", 501, 1) 
+c2 = Curator.from_string("2002;Curador Assistente Teste;502;2")
+
+if c1.id not in Curator.lst:
+    Curator.insert(c1.id)
+if c2.id not in Curator.lst:
+    Curator.insert(c2.id)
+
+#creates 2 visitors 
+v1 = Visitors(9001, 1001, 501, "2025-12-31", 500)
+v2 = Visitors.from_string("9002;1002;502;2025-12-31;850")
+
+if v1.id not in Visitors.lst:
+    Visitors.insert(v1.id)
+if v2.id not in Visitors.lst:
+    Visitors.insert(v2.id)
+
+for id in Visitors.lst:
+    print(Visitors.obj[id])
 
 
 
