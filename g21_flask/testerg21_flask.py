@@ -16,10 +16,10 @@ from classes.visitors import Visitors
 
 import datetime
 
-app = Flask(__name__)
+app = Flask(__name__) 
+
 
 @app.route("/")
-
 def bem_vindo():
     return "<h1>Bem-vindo!</h1>"
 
