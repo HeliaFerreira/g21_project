@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}Início{% endblock %}
+
+{% block content %}
+    <style>
+        .botao-fixe {
+            background: linear-gradient(45deg, #FF416C, #FF4B2B);
+            color: white;
+            padding: 15px 35px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 30px;
+        }
+
+        .botao-fixe:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 75, 43, 0.6);
+        }
+    </style>
+
+    <div style="text-align: center; margin-top: 50px;">
+        <h1>🏛️ Sistema de Gestão de Museus G21</h1>
+        <p>Bem-vindo ao portal de gestão do Grupo 21. A base de dados está carregada e os gráficos estão prontos!</p>
+        
+        <button id="btn-grafico" class="botao-fixe">📊 Ver Estatísticas</button>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+{% endblock %}

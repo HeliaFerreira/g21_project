@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Gestão de Museus{% endblock %}</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            color: #333; 
+            margin: 0; 
+            padding: 0; 
+            
+            /* --- MAGIA DA IMAGEM DE FUNDO AQUI --- */
+            /* A película branca com 85% de opacidade por cima da imagem */
+            background-image: linear-gradient(rgba(244, 247, 246, 0.85), rgba(244, 247, 246, 0.85)), 
+                              url("{{ url_for('static', filename='img/fundo.jpg') }}");
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+        
+        /* A Barra de Navegação no Topo */
+        nav { background-color: #ff6b6b; padding: 15px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        nav a { color: white; text-decoration: none; padding: 10px 20px; font-weight: bold; margin: 0 5px; transition: 0.3s; }
+        nav a:hover { background-color: #ee5253; border-radius: 20px; }
+
+        .container { padding: 40px; display: flex; flex-direction: column; align-items: center; }
+        h1 { color: #2c3e50; margin-bottom: 20px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        
+        /* O Cartão da Tabela */
+        .tabela-container { background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); width: 80%; max-width: 800px; margin-bottom: 30px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #2c3e50; color: white; }
+        tr:hover { background-color: #f1f2f6; }
+
+        /* O Logótipo da FEUP no canto inferior direito */
+        .logo-feup {
+            position: fixed;
+            bottom: 20px;     /* Distância do fundo do ecrã */
+            right: 20px;      /* Distância do lado direito do ecrã */
+            width: 150px;     /* Tamanho do logótipo */
+            opacity: 0.8;     /* Fica ligeiramente transparente */
+            transition: 0.3s ease;
+            z-index: 1000;    /* Garante que fica sempre por cima de tudo */
+        }
+
+        /* Efeito quando passas o rato por cima do logótipo */
+        .logo-feup:hover {
+            opacity: 1;       /* Fica 100% visível */
+            transform: scale(1.05); /* Cresce um bocadinho */
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/">🏠 Início</a>
+        <a href="/museus">🏛️ Museus</a>
+        <a href="/exposicoes">🖼️ Exposições</a>
+        <a href="/curadores">🧑‍🏫 Curadores</a>
+        <a href="/visitantes">🎟️ Visitantes</a>
+    </nav>
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <img src="{{ url_for('static', filename='img/feup_logo.png') }}" alt="Logótipo FEUP" class="logo-feup">
+
+</body>
+</html>

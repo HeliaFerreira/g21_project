@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}Museus{% endblock %}
+
+{% block content %}
+    <h1>🏛️ Diretório de Museus</h1>
+    
+    <div class="tabela-container">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nome do Museu</th>
+            </tr>
+            {% for m in museus %}
+            <tr>
+                <td>{{ m.id }}</td>
+                <td><strong>{{ m.name }}</strong></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

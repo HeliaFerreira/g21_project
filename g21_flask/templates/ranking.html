@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block title %}Estatísticas e Rankings{% endblock %}
+
+{% block content %}
+<style>
+    .dashboard-container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+    }
+    
+    .grafico-caixa {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        padding: 20px;
+        margin-bottom: 40px;
+        transition: transform 0.2s;
+    }
+    
+    .grafico-caixa:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+    
+    h1 { text-align: center; color: #333; margin-bottom: 40px; }
+    
+    .btn-voltar {
+        display: block;
+        width: 250px;
+        margin: 0 auto 50px auto;
+        padding: 12px 20px;
+        background-color: #333;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+    .btn-voltar:hover { 
+        background-color: #FF416C; 
+        color: white;
+    }
+</style>
+
+<div class="dashboard-container">
+    <h1>📊 Dashboard de Estatísticas do Museu</h1>
+
+    <div class="grafico-caixa">
+        {{ grafico_barras | safe }}
+    </div>
+
+    <div class="grafico-caixa">
+        {{ grafico_circular | safe }}
+    </div>
+
+    <a href="/" class="btn-voltar">⬅ Voltar ao Início</a>
+</div>
+{% endblock %}

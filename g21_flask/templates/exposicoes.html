@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}Exposições{% endblock %}
+
+{% block content %}
+    <h1>🖼️ Diretório de Exposições</h1>
+    
+    <div class="tabela-container">
+        <table>
+            <tr>
+                <th>ID da Exposição</th>
+                <th>Nome da Exposição</th>
+            </tr>
+            {% for e in exposicoes %}
+            <tr>
+                <td>{{ e.id }}</td>
+                <td><strong>{{ e.title or 'Sem Título' }}</strong></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
