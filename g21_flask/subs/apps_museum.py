@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, session
-from classes.person import Person
+from classes.museum import Museum
 
 prev_option = ""
 
-def apps_person():
+def apps_museum():
     global prev_option
     ulogin=session.get("user")
     if (ulogin != None):
@@ -13,50 +13,45 @@ def apps_person():
         if option == "edit":
             butshow, butedit = "disabled", "enabled"
         elif option == "delete":
-            obj = Person.current()
-            Person.remove(obj.id)
-            if not Person.previous():
-                Person.first()
+            obj = Museum.current()
+            Museum.remove(obj.id)
+            if not Museum.previous():
+                Museum.first()
         elif option == "insert":
             butshow, butedit = "disabled", "enabled"
         elif option == 'cancel':
             pass
         elif prev_option == 'insert' and option == 'save':
-            strobj = str(Person.get_id(0))
-            strobj = strobj + ';' + request.form["name"] + ';' + \
-            request.form["dob"] + ';' + request.form["salary"]
-            obj = Person.from_string(strobj)
-            Person.insert(obj.id)
-            Person.last()
+            strobj = str(Museum.get_id(0))
+            strobj = strobj + ';' + request.form["name"] 
+            obj = Museum.from_string(strobj)
+            Museum.insert(obj.id)
+            Museum.last()
         elif prev_option == 'edit' and option == 'save':
-            obj = Person.current()
+            obj = Museum.current()
             obj.name = request.form["name"]
-            obj.dob = request.form["dob"]
-            obj.salary = float(request.form["salary"])
-            Person.update(obj.id)
+            Museum.update(obj.id)
         elif option == "first":
-            Person.first()
+            Museum.first()
         elif option == "previous":
-            Person.previous()
+            Museum.previous()
         elif option == "next":
-            Person.nextrec()
+            Museum.nextrec()
         elif option == "last":
-            Person.last()
+            Museum.last()
         elif option == 'exit':
             return render_template("index.html", ulogin=session.get("user"))
         prev_option = option
-        obj = Person.current()
-        if option == 'insert' or len(Person.lst) == 0:
+        obj = Museum.current()
+        if option == 'insert' or len(Museum.lst) == 0:
             id = 0
-            id = Person.get_id(id)
-            name = dob = salary = ""
+            id = Museum.get_id(id)
+            name = ""
         else:
             id = obj.id
             name = obj.name
-            dob = obj.dob
-            salary = obj.salary
-        return render_template("person.html", butshow=butshow, butedit=butedit, 
-                        id=id,name = name,dob=dob,salary=salary, 
+        return render_template("museum.html", butshow=butshow, butedit=butedit, 
+                        id=id,name = name, 
                         ulogin=session.get("user"))
     else:
         return render_template("index.html", ulogin=ulogin)
