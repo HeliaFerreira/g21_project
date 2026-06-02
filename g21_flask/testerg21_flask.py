@@ -20,7 +20,7 @@ import plotly.express as px
 
 app = Flask(__name__)
 
-# CARREGAR OS DADOS PELA ORDEM CERTA!
+
 Museum.read('data/database.db')
 Specialty.read('data/database.db') 
 Exhibit.read('data/database.db')
@@ -60,13 +60,13 @@ def listar_visitantes():
     lista_de_visitantes = list(Visitors.obj.values())
     return render_template("visitantes.html", visitantes=lista_de_visitantes)
 
-# --- A ROTA DOS GRÁFICOS ---
+
 @app.route('/ranking-exposicoes')
 def ranking_exposicoes():
-    # Ligar à base de dados
+
     conn = sqlite3.connect('data/database.db')
     
-    # --- GRÁFICO 1: O RANKING DE VISITANTES (BARRAS) ---
+
     query1 = """
         SELECT Exhibit.title as Titulo, SUM(Visitors."nº visitors") as Total_Visitantes
         FROM Exhibit
@@ -84,7 +84,7 @@ def ranking_exposicoes():
     fig1.update_layout(yaxis={'categoryorder':'total ascending'})
     grafico1_html = fig1.to_html(full_html=False)
 
-    # --- GRÁFICO 2: EXPOSIÇÕES POR CATEGORIA (CIRCULAR) ---
+
     query2 = """
         SELECT category as Categoria, COUNT(id) as Quantidade
         FROM Exhibit
