@@ -40,7 +40,7 @@ def apps_specialty():
         elif option == "last":
             Specialty.last()
         elif option == 'exit':
-            return render_template("index.html", ulogin=session.get("user"))
+            return render_template("layout.html", ulogin=session.get("user"))
         prev_option = option
         obj = Specialty.current()
         if option == 'insert' or len(Specialty.lst) == 0:
@@ -54,6 +54,6 @@ def apps_specialty():
                         id=id,name = name,
                         ulogin=session.get("user"))
     else:
-        return render_template("index.html", ulogin=ulogin)
+        return render_template("layout.html", ulogin=ulogin)
 # -*- coding: utf-8 -*-
 

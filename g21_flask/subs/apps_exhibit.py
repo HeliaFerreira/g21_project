@@ -43,7 +43,7 @@ def apps_exhibit():
         elif option == "last":
             Exhibit.last()
         elif option == 'exit':
-            return render_template("index.html", ulogin=session.get("user"))
+            return render_template("layout.html", ulogin=session.get("user"))
         prev_option = option
         obj = Exhibit.current()
         if option == 'insert' or len(Exhibit.lst) == 0:
@@ -55,10 +55,10 @@ def apps_exhibit():
             creation_date = obj.creation_date
             title = obj.title
             category = obj.category
-        return render_template("person.html", butshow=butshow, butedit=butedit, 
+        return render_template("exhibit.html", butshow=butshow, butedit=butedit, 
                         id=id,creation_date = creation_date,title=title,category=category, 
                         ulogin=session.get("user"))
     else:
-        return render_template("index.html", ulogin=ulogin)
+        return render_template("layout.html", ulogin=ulogin)
 # -*- coding: utf-8 -*-
 

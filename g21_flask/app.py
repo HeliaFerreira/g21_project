@@ -20,6 +20,7 @@ import sqlite3
 import pandas as pd
 import plotly.express as px
 
+
 app = Flask(__name__)
 
 
@@ -28,7 +29,10 @@ Specialty.read('data/database.db')
 Exhibit.read('data/database.db')
 Curator.read('data/database.db')
 Visitors.read('data/database.db')
-Userlogin.read('data/database.db')
+Userlogin.read('data/database.db') 
+prev_option = ""
+app.secret_key = 'BAD_SECRET_KEY'
+
 
 @app.route("/")
 def bem_vindo():
@@ -114,7 +118,7 @@ def login():
 @app.route("/logoff")
 def logoff():
     session.pop("user",None)
-    return render_template("index.html", ulogin=session.get("user"))
+    return render_template("layout.html", ulogin=session.get("user"))
 
 @app.route("/chklogin", methods=["post","get"])
 def chklogin():
@@ -123,7 +127,7 @@ def chklogin():
     resul = Userlogin.chk_password(user, password)
     if resul == "Valid":
         session["user"] = user
-        return render_template("index.html", ulogin=session.get("user"))
+        return render_template("layout.html", ulogin=session.get("user"))
     return render_template("login.html", user=user, password = password, ulogin=session.get("user"),resul = resul)
 
 @app.route("/Userlogin", methods=["post","get"])
@@ -182,7 +186,7 @@ def userlogin():
         elif option == "last":
             Userlogin.last()
         elif option == 'exit':
-            return render_template("index.html", ulogin=session.get("user"))
+            return render_template("layout.html", ulogin=session.get("user"))
         prev_option = option
         obj = Userlogin.current()
         if option == 'insert' or len(Userlogin.lst) == 0:
@@ -198,7 +202,7 @@ def userlogin():
         return render_template("userlogin.html", butshow=butshow, butedit=butedit, msg=msg,id=id, user=user,
                                usergroup = usergroup,password=password,ulogin=session.get("user"), group=group)
     else:
-        return render_template("index.html", ulogin=ulogin)
+        return render_template("layout.html", ulogin=ulogin)
 
 
 if __name__ == '__main__':

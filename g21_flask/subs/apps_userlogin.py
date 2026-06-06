@@ -49,7 +49,7 @@ def apps_userlogin():
         elif option == "last":
             Userlogin.last()
         elif option == 'exit':
-            return render_template("index.html", ulogin=session.get("user"))
+            return render_template("layout.html", ulogin=session.get("user"))
         prev_option = option
         obj = Userlogin.current()
         if option == 'insert' or len(Userlogin.lst) == 0:
@@ -62,6 +62,6 @@ def apps_userlogin():
             password = ""
         return render_template("userlogin.html", butshow=butshow, butedit=butedit, user=user,usergroup = usergroup,password=password, ulogin=session.get("user"), group=group)
     else:
-        return render_template("index.html", ulogin=ulogin)
+        return render_template("layout.html", ulogin=ulogin)
 # -*- coding: utf-8 -*-
 

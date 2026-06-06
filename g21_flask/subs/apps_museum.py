@@ -40,7 +40,7 @@ def apps_museum():
         elif option == "last":
             Museum.last()
         elif option == 'exit':
-            return render_template("index.html", ulogin=session.get("user"))
+            return render_template("layout.html", ulogin=session.get("user"))
         prev_option = option
         obj = Museum.current()
         if option == 'insert' or len(Museum.lst) == 0:
@@ -54,6 +54,6 @@ def apps_museum():
                         id=id,name = name, 
                         ulogin=session.get("user"))
     else:
-        return render_template("index.html", ulogin=ulogin)
+        return render_template("layout.html", ulogin=ulogin)
 # -*- coding: utf-8 -*-
 
