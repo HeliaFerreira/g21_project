@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout1.html" %}
 
 {% block title %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
@@ -9,8 +9,8 @@
 
     <div class="dados">
         <br><br><br>
-        <img src="{{ url_for('static', filename='images/Userlogin.jpg')}}" alt="userlogin" width="200" height="200">
-        <h1>Userlogin</h1>
+        
+        <h1>Gestão de Utilizadores 🔐</h1>
         <br>
         <button id="edit" type="button" {{butshow}} onclick="window.location.href = '/Userlogin?option=edit'" class="button1">Edit</button>
         {% if group == "admin" %} 

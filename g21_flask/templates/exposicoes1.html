@@ -1,0 +1,106 @@
+{% extends "layout1.html" %}
+
+{% block title %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+{% endblock %}
+
+{% block content %}
+
+<div class="dados">
+    <br><br><br>
+    <h1>Gestão de Exposições 🔐</h1>
+    <br>
+    <button id="edit" type="button" {{butshow}}
+            onclick="window.location.href='/exhibits?option=edit'"
+            class="button1">
+        Edit
+    </button>
+    {% if group == "admin" %}
+        <button id="delete" type="button" {{butshow}}
+                onclick="window.location.href='/exhibits?option=delete'"
+                class="button1">
+            Delete
+        </button>
+        <button id="insert" type="button" {{butshow}}
+                onclick="window.location.href='/exhibits?option=insert'"
+                class="button1">
+            Insert
+        </button>
+    {% endif %}
+    <button id="save" type="submit" form="form" {{butedit}}
+            class="button1">
+        Save
+    </button>
+    <button id="cancel" type="button" {{butedit}}
+            onclick="window.location.href='/exhibits?option=cancel'"
+            class="button1">
+        Cancel
+    </button>
+    <button id="exit" type="button" {{butshow}}
+            onclick="window.location.href='/exhibits?option=exit'"
+            class="button1">
+        Exit
+    </button>
+    <br><br>
+    <form id="form" action="/exhibits?option=save" method="post">
+        <label for="id">Id:</label>
+        <input type="text"
+               disabled
+               id="id"
+               name="id"
+               value="{{id}}"
+               size="4"/>
+        <br><br>
+        <label for="creation_date">Creation Date:</label>
+        <input type="date"
+               {{butedit}}
+               id="creation_date"
+               name="creation_date"
+               value="{{creation_date}}">
+        <br><br>
+        <label for="title">Title:</label>
+        <input type="text"
+               {{butedit}}
+               id="title"
+               name="title"
+               value="{{title}}"
+               size="40"/>
+        <br><br>
+        <label for="category">Category:</label>
+        <input type="text"
+               {{butedit}}
+               id="category"
+               name="category"
+               value="{{category}}"
+               size="40"/>
+        <br><br>
+    </form>
+    <br>
+    {% if group %}
+        <button id="first" type="button" {{butshow}}
+                onclick="window.location.href='/exhibits?option=first'"
+                class="button1">
+            First
+        </button>
+        <button id="previous" type="button" {{butshow}}
+                onclick="window.location.href='/exhibits?option=previous'"
+                class="button1">
+            Previous
+        </button>
+        <button id="next" type="button" {{butshow}}
+                onclick="window.location.href='/exhibits?option=next'"
+                class="button1">
+            Next
+        </button>
+        <button id="last" type="button" {{butshow}}
+                onclick="window.location.href='/exhibits?option=last'"
+                class="button1">
+            Last
+        </button>
+    {% endif %}
+    <br>
+    <p style="color:red;">{{msg}}</p>
+
+</div>
+
+{% endblock %}

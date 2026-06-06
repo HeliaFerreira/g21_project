@@ -67,6 +67,165 @@ def listar_visitantes():
     lista_de_visitantes = list(Visitors.obj.values())
     return render_template("visitantes.html", visitantes=lista_de_visitantes)
 
+@app.route("/museus1", methods=["POST", "GET"])
+def museus1():
+    global prev_option
+    msg = ""
+    ulogin = session.get("user")
+    if ulogin is None:
+        return render_template("layout.html", ulogin=None)
+    user_id = Userlogin.get_user_id(ulogin)
+    group = Userlogin.obj[user_id].usergroup
+
+    butshow = "enabled"
+    butedit = "disabled"
+
+    option = request.args.get("option")
+    if group != "admin" and option in ["edit", "delete", "insert", "save"]:
+        option = None  
+    if option == "edit":
+        butshow = "disabled"
+        butedit = "enabled"
+    elif option == "delete":
+        obj = Museum.current()
+        Museum.remove(obj.id)
+        if not Museum.previous():
+            Museum.first()
+    elif option == "insert":
+        butshow = "disabled"
+        butedit = "enabled"
+    elif prev_option == "insert" and option == "save":
+        name = request.form["name"]
+        obj = Museum(0, name)
+        Museum.insert(obj.id)
+        Museum.last()
+    elif prev_option == "edit" and option == "save":
+        obj = Museum.current()
+        obj.name = request.form["name"]
+        Museum.update(obj.id)
+    elif option == "first":
+        Museum.first()
+    elif option == "previous":
+        Museum.previous()
+    elif option == "next":
+        Museum.nextrec()
+    elif option == "last":
+        Museum.last()
+    elif option == "cancel":
+        pass
+    elif option == "exit":
+        return render_template("layout1.html", ulogin=session.get("user"))
+    prev_option = option
+    obj = Museum.current()
+    if option == "insert" or len(Museum.lst) == 0:
+        id = 0
+        name = ""
+    else:
+        id = obj.id
+        name = obj.name
+    return render_template(
+        "museus1.html",
+        butshow=butshow,
+        butedit=butedit,
+        id=id,
+        name=name,
+        ulogin=session.get("user"),
+        group=group
+    )  
+
+
+@app.route("/exposicoes1", methods=["POST", "GET"])
+def exposicoes1():
+    global prev_option
+    msg = ""
+    ulogin = session.get("user")
+    if ulogin is None:
+        return render_template("layout.html", ulogin=None)
+    user_id = Userlogin.get_user_id(ulogin)
+    group = Userlogin.obj[user_id].usergroup
+    butshow = "enabled"
+    butedit = "disabled"
+    option = request.args.get("option")
+    if group != "admin" and option in ["edit", "delete", "insert", "save"]:
+        option = None
+    if option == "edit":
+        butshow = "disabled"
+        butedit = "enabled"
+    elif option == "delete":
+        obj = Exhibit.current()
+        Exhibit.remove(obj.id)
+        if not Exhibit.previous():
+            Exhibit.first()
+    elif option == "insert":
+        butshow = "disabled"
+        butedit = "enabled"
+    elif prev_option == "insert" and option == "save":
+        creation_date = request.form["creation_date"]
+        title = request.form["title"]
+        category = request.form["category"]
+        obj = Exhibit(0,creation_date,title,category)
+        Exhibit.insert(obj.id)
+        Exhibit.last()
+    elif prev_option == "edit" and option == "save":
+        obj = Exhibit.current()
+        obj.creation_date = datetime.date.fromisoformat(
+            request.form["creation_date"]
+        )
+        obj.title = request.form["title"]
+        obj.category = request.form["category"]
+        Exhibit.update(obj.id)
+    elif option == "first":
+        Exhibit.first()
+    elif option == "previous":
+        Exhibit.previous()
+    elif option == "next":
+        Exhibit.nextrec()
+    elif option == "last":
+        Exhibit.last()
+    elif option == "cancel":
+        pass
+    elif option == "exit":
+        return render_template(
+            "layout1.html",
+            ulogin=session.get("user")
+        )
+    prev_option = option
+    obj = Exhibit.current()
+    if option == "insert" or len(Exhibit.lst) == 0:
+        id = 0
+        creation_date = ""
+        title = ""
+        category = ""
+    else:
+        id = obj.id
+        creation_date = obj.creation_date
+        title = obj.title
+        category = obj.category
+    return render_template(
+        "exposicoes1.html",
+        butshow=butshow,
+        butedit=butedit,
+        msg=msg,
+        id=id,
+        creation_date=creation_date,
+        title=title,
+        category=category,
+        ulogin=session.get("user"),
+        group=group
+    )
+
+
+@app.route("/curadores1")
+def curadores1():
+    return render_template("curadores1.html")
+                           
+                           
+@app.route("/visitantes1")
+def list_visitantes():
+    lista_de_visitantes = list(Visitors.obj.values())
+    return render_template("visitantes1.html", visitantes=lista_de_visitantes)
+
+
 
 @app.route('/ranking-exposicoes')
 def ranking_exposicoes():
@@ -118,7 +277,7 @@ def login():
 @app.route("/logoff")
 def logoff():
     session.pop("user",None)
-    return render_template("layout.html", ulogin=session.get("user"))
+    return render_template("home.html", ulogin=session.get("user"))
 
 @app.route("/chklogin", methods=["post","get"])
 def chklogin():
@@ -127,7 +286,10 @@ def chklogin():
     resul = Userlogin.chk_password(user, password)
     if resul == "Valid":
         session["user"] = user
-        return render_template("layout.html", ulogin=session.get("user"))
+        if resul == "Valid":
+            session["user"] = user
+            session["group"] = Userlogin.obj[Userlogin.get_user_id(user)].usergroup
+        return render_template("layout1.html", ulogin=session.get("user"))
     return render_template("login.html", user=user, password = password, ulogin=session.get("user"),resul = resul)
 
 @app.route("/Userlogin", methods=["post","get"])

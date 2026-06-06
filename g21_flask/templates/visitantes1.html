@@ -1,0 +1,22 @@
+{% extends "layout1.html" %}
+
+{% block title %}Visitantes{% endblock %}
+
+{% block content %}
+    <h1>🎟️ Registos de Visitantes</h1>
+    
+    <div class="tabela-container">
+        <table>
+            <tr>
+                <th>ID do Registo</th>
+                <th>Número de Visitantes</th>
+            </tr>
+            {% for v in visitantes %}
+            <tr>
+                <td>{{ v.id }}</td>
+                <td><strong>{{ v.n_visitors }}</strong></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
