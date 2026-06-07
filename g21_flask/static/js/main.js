@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (botaoGrafico) {
         botaoGrafico.addEventListener("click", function() {
             // Efeito fixe: muda o texto do botão quando clicas
-            botaoGrafico.innerHTML = "A carregar dados... ⏳";
+            botaoGrafico.innerHTML = "Loading data... ⏳";
             botaoGrafico.style.transform = "scale(0.95)";
             
             // Espera meio segundo (para se ver a animação) e redireciona para o gráfico

@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, session
 
-from classes.curator import Curator
-from classes.exhibit import Exhibit
 from classes.museum import Museum
+from classes.exhibit import Exhibit
+from classes.curator import Curator
 from classes.specialty import Specialty
 from classes.visitors import Visitors
+from classes.userlogin import Userlogin
 
 prev_option = ""
 
@@ -51,7 +52,7 @@ def apps_gform(cname=''):
             elif option == "last":
                 cl.last()
             elif option == 'exit':
-                return render_template("layout.html", ulogin=session.get("user"))
+                return render_template("layout1.html", ulogin=session.get("user"))
         prev_option = option
         obj = cl.current()
         if option == 'insert' or len(cl.lst) == 0:
@@ -65,6 +66,6 @@ def apps_gform(cname=''):
         # return render_template("gform.html", butshow=butshow, butedit=butedit, cname=cname, code=code,name = name,dob=dob,salary=salary)
         return render_template("gform.html", butshow=butshow, butedit=butedit, cname=cname, obj=obj,att=cl.att,des=cl.des,ulogin=session.get("user"))
     else:
-        return render_template("layout.html", ulogin=ulogin)
+        return render_template("layout1.html", ulogin=ulogin)
 # -*- coding: utf-8 -*-
 

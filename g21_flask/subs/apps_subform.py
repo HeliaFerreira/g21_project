@@ -1,12 +1,10 @@
 from flask import Flask, render_template, request, session
-from classes.person import Person
-from datafile import filename
-from classes.customer import Customer
-from classes.product import Product
-from classes.customerorder import CustomerOrder
-from classes.orderproduct import OrderProduct
+from classes.museum import Museum
+from classes.exhibit import Exhibit
+from classes.curator import Curator
+from classes.specialty import Specialty
+from classes.visitors import Visitors
 from classes.userlogin import Userlogin
-
 prev_option = ""
 
 def apps_subform(cname=""):
@@ -79,7 +77,7 @@ def apps_subform(cname=""):
                 # code = str(getattr(objl, sbl.att[0])) + str(getattr(objl, sbl.att[1]))
                 sbl.insert(objl.id)
             elif option == 'exit':
-                return render_template("layout.html", ulogin=session.get("user"))
+                return render_template("layout1.html", ulogin=session.get("user"))
         prev_option = option
         obj = cl.current()
         headers = list()
@@ -98,6 +96,6 @@ def apps_subform(cname=""):
         # return render_template("gform.html", butshow=butshow, butedit=butedit, cname=cname, code=code,name = name,dob=dob,salary=salary)
         return render_template("subform.html", cl_header=cl_header,sbl_header=sbl_header,butshow=butshow, butedit=butedit, cname=cname, obj=obj,att=cl.att,des=cl.des, ulogin=session.get("user"),objl=objl,desl=sbl.des, attl=sbl.att)
     else:
-        return render_template("layout.html", ulogin=ulogin)
+        return render_template("layout1.html", ulogin=ulogin)
 # -*- coding: utf-8 -*-
 

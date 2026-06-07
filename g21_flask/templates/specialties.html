@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}Specialties{% endblock %}
+
+{% block content %}
+    <h1>🏛️ Specialties Directory</h1>
+    
+    <div class="tabela-container">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Specialty</th>
+            </tr>
+            {% for s in specialties %}
+            <tr>
+                <td>{{ s.id }}</td>
+                <td><strong>{{ s.specialty_name }}</strong></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %} 
