@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
     <meta charset="UTF-8">
     <title>{% block title %}Gestão de Museus{% endblock %}</title>
     <style>
@@ -56,10 +57,10 @@
 
     <nav>
         <a href="/">🏠 Home</a>
-        <a href="/gform/Museum">🏛️ Museum</a>        
-        <a href="/gform/Exhibit"> Exhibit </a>
+        <a href="/gform/Museum">🏛️ Museums</a>        
+        <a href="/gform/Exhibit"> 🖼️ Exhibits </a>
         <a href="/curadores1">🧑‍🏫 Curators</a>        
-        <a href="/gform/Specialty"> Specialty </a> 
+        <a href="/gform/Specialty">🎨 Specialty </a> 
         <a href="/visitantes1">🎟️ Visitors</a>        
         <a class="button" href="/Userlogin">Users</a>
         <a class="button" style="color:lightblue">User: {{ulogin}}</a>
@@ -69,6 +70,11 @@
 
     <div class="container">
         {% block content %}
+        <div class="welcome-card">
+        <h1> Welcome, {{ ulogin }}!</h1>
+        <p>Please navigate using the menu above.</p>
+    </div>
+
         {% endblock %}
     </div>
 
